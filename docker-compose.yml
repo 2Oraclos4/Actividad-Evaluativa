@@ -41,9 +41,7 @@ services:
     networks:
       - mynetwork
     command: >
-      bash -c "pip install -r /opt/back_end/requirements.txt &&
-               python /opt/back_end/manage.py migrate &&
-               python /opt/back_end/manage.py runserver 0.0.0.0:8000"
+      bash -c "pip install -r /opt/back_end/requirements.txt"
 
 networks:
   mynetwork:
