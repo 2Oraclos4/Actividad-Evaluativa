@@ -15,6 +15,17 @@ services:
     networks:
       - mynetwork
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql-db
+      MYSQL_ROOT_PASSWORD: del1al9
+    ports:
+      - "8080:80"
+    networks:
+      - mynetwork
+
   prueba_django:
     image: python:3.9.5
     container_name: prueba_djangoISDM
@@ -29,6 +40,10 @@ services:
     tty: true
     networks:
       - mynetwork
+    command: >
+      bash -c "pip install -r /opt/back_end/requirements.txt &&
+               python /opt/back_end/manage.py migrate &&
+               python /opt/back_end/manage.py runserver 0.0.0.0:8000"
 
 networks:
   mynetwork:
